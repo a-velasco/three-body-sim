@@ -11,7 +11,7 @@ def center_of_mass(masses, positions):
 	return (1./total_mass) * sum(masses[i]*positions[i] for i in range(0,len(masses)))
 
 # Function to return default initial conditions
-def get_initial_conditions(a=1.):
+def get_initial_conditions( a=1.):
 
 	masses=[3.,4.,5.]
 	x0 = np.array([[1.,3.], [-2.,-1.], [1.,-1.]])
@@ -20,7 +20,7 @@ def get_initial_conditions(a=1.):
 	return x0, v0, masses
 
 # Plotting function
-def plot_trajectories(m1x, m1y, m2x, m2y, m3x, m3y, masses):
+def plot_trajectories( m1x, m1y, m2x, m2y, m3x, m3y, masses ):
 
 	#m1 trajectory
 	plt.plot(m1x[0], m1y[0], 'rx', markersize=4, label='start')
@@ -42,7 +42,7 @@ def plot_trajectories(m1x, m1y, m2x, m2y, m3x, m3y, masses):
 	plt.show()
 
 # Given the masses and positions of 3 bodies at a given time, calculate acceleration of each planet
-def accel(masses, x):
+def accel( masses, x ):
 
 	# planet 1 (0, wrt 1 & 2)
 	a_m1 = - masses[1] * (x[0] - x[1])/((np.abs(np.linalg.norm(x[0]-x[1])))**3)
@@ -64,7 +64,7 @@ def accel(masses, x):
 	return accel
 
 # 4th and 5th order Runge-Kutta-Fehlberg algorithm
-def RKF45(x0, v0, masses, dt):
+def RKF45( x0, v0, masses, dt ):
 
 	a  = np.array([[0.         , 0.           , 0.          , 0.		  , 0.		],
             	   [1./4.      , 0.           , 0.          , 0.		  , 0.   	],
@@ -104,7 +104,7 @@ def RKF45(x0, v0, masses, dt):
 	return x4, v4, x5, v5
 
 # Function that calls RKF45 scheme iteratively with an adapting timestep
-def solver(x0, v0, dt, t, T, masses, max_epsilon):
+def solver( x0, v0, dt, t, T, masses, max_epsilon ):
 
 	# initialize arrays to store all accepted 5th order solutions
 	x_array = x0
@@ -164,7 +164,7 @@ def solver(x0, v0, dt, t, T, masses, max_epsilon):
 if __name__ == '__main__':
 
 	# Initial conditions
-	x0, v0, masses = get_initial_conditions('pythagorean')
+	x0, v0, masses = get_initial_conditions()
 
 	dt = 0.01
 	t = 0.
